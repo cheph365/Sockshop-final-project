@@ -1,49 +1,7 @@
-# Define input variables
-variable "ARM_SUBSCRIPTION_ID" {
-  type        = string
-  description = "Azure subscription ID"
-}
-
-variable "ARM_CLIENT_ID" {
-  type        = string
-  description = "Service principal client ID"
-}
-
-variable "ARM_CLIENT_SECRET" {
-  type        = string
-  description = "Service principal client secret"
-}
-
-variable "ARM_TENANT_ID" {
-  type        = string
-  description = "Azure Active Directory tenant ID"
-}
-variable "node_count" {
-  description = "Number of nodes in the Kubernetes cluster"
-  type        = number
-  # You can set a default value if needed
-  default     = 3
-}
-
-variable "username" {
-  description = "Username for the Kubernetes cluster nodes"
-  type        = string
-  # You can set a default value if needed
-  default     = "azureadmin"
-}
-# Configure Azure provider using variables
-provider "azurerm" {
-  features {}
-  subscription_id = var.ARM_SUBSCRIPTION_ID
-  client_id       = var.ARM_CLIENT_ID
-  client_secret   = var.ARM_CLIENT_SECRET
-  tenant_id       = var.ARM_TENANT_ID
-}
-
 # Generate random resource group name
 resource "azurerm_resource_group" "rg" {
   name     = "Capstone_Cluster"
-  location = "West Europe"
+  location = var.location
 }
 
 resource "azurerm_kubernetes_cluster" "k8s" {
