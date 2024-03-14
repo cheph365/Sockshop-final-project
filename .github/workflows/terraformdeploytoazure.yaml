@@ -42,12 +42,15 @@ jobs:
       run: |
         # Initialize a new or existing Terraform working directory by creating initial files,
         # loading any remote state, downloading modules, etc.
+        cd Infrastructure
         terraform init
  
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
       id: format
-      run: terraform fmt -check
+      run: |
+       cd Infrastructure
+       terraform fmt -check
       continue-on-error: true
 
     - name: Terraform Plan
@@ -58,7 +61,7 @@ jobs:
         ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
         ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
       run: |
-       # terraform plan -no-color
+        cd Infrastructure
         terraform plan -out tfplan -no-color
        
         # # show the tfplan file
@@ -73,4 +76,6 @@ jobs:
         ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
         ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
         ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-      run: terraform apply -auto-approve
+      run: |
+        cd Infrastructure 
+        terraform apply -auto-approve
