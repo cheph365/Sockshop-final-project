@@ -3,6 +3,8 @@ name: 'Create Infra with Terraform'
 on:
   push:
     branches: [ main ]
+    paths:
+      - Infrastructure/**
   pull_request:
     branches:  none # [ main ]
   # Allows you to run this workflow manually from the Actions tab
