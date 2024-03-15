@@ -1,14 +1,14 @@
 # Generate random resource group name
 resource "azurerm_resource_group" "rg" {
-  name     = "Capstone_Cluster"
+  name     = "Project_Cluster"
   location = var.location
 }
 
 resource "azurerm_kubernetes_cluster" "k8s" {
-  name                = "Capstone-aks1"
+  name                = "Project-aks1"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  dns_prefix          = "Capstoneaks1"
+  dns_prefix          = "projectaks1"
 
   identity {
     type = "SystemAssigned"
