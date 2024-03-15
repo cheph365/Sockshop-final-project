@@ -1,4 +1,3 @@
-# Generate random resource group name
 resource "azurerm_resource_group" "rg" {
   name     = "Project_Cluster"
   location = var.location
